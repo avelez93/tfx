@@ -622,7 +622,10 @@ def _get_target_span_version(
   latest_span_int = None
   latest_version = None
   latest_version_int = None
-
+    
+  if os.name=='nt':
+    split_glob_pattern=split_glob_pattern.replace('\\','\\\\') #For Windows. It is needed for not having problems with regular expresion syntax on funcion _parse in sre_parse.py library
+    
   files = fileio.glob(split_glob_pattern)
   for file_path in files:
     match_span_tokens, match_span_int, match_version, match_version_int = (
